@@ -34,4 +34,5 @@ Levels
 -Enemy Pool
 -Manual vs Algorithm Based
 -Map Design
--
+-Wave Definition
+-Pooling vs non-pooling waves
