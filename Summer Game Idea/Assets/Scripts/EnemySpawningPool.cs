@@ -8,6 +8,22 @@ public class EnemyPoolInfo
 {
     public GameObject Enemy;
     public int AmountToPool;
+    private int amountPooled;
+
+    public void PoolEnemy()
+    {
+        amountPooled++;
+    }
+
+    public bool IsFinishedPooling()
+    {
+        return amountPooled == AmountToPool;
+    }
+
+    public void ResetPool()
+    {
+        amountPooled = 0;
+    }
 }
 
 
@@ -44,25 +60,26 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
             EnemyPoolInfo nextEnemy = tempEnemies[tempEnemyIndex];
 
             //avoid null tempEnemies (could be removed)
-            if (nextEnemy.Enemy == null)
+            if (nextEnemy.Enemy == null || nextEnemy.AmountToPool <= 0)
             {
                 tempEnemies.RemoveAt(tempEnemyIndex);
                 continue;
             }
 
+            nextEnemy.PoolEnemy();
+
             //spawn an enemyInstance of that item and add it to the queue
             GameObject enemyInstance = Instantiate(nextEnemy.Enemy);
             enemyInstance.SetActive(false);
             EnemyQueue.Enqueue(enemyInstance);
-            //decrement how many of this item need to spawn
-            nextEnemy.AmountToPool--;
-
-            //if the item is finished, remove it from the overall list
-            if (nextEnemy.AmountToPool == 0)
+            
+            if(nextEnemy.IsFinishedPooling())
             {
                 tempEnemies.RemoveAt(tempEnemyIndex);
             }
         }
+
+        foreach (EnemyPoolInfo enemy in waveEnemies) { enemy.ResetPool(); }
         tempEnemies = null;
     }
 

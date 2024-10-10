@@ -89,8 +89,7 @@ public class WaveManager : Singleton<WaveManager>
         spawnerState = SpawnState.COUNTING;
         waveCountdown = timeBetweenWaves;
 
-        if (nextWave + 1 > waves.Length - 1) { nextWave = 0; }
-        else { nextWave++; }
+        nextWave = (nextWave + 1) % waves.Length;
         
     }
 }

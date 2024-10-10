@@ -24,7 +24,7 @@ public class EnemyMovement : MonoBehaviour
         {
             EnemySpawningPool.Instance.ActiveEnemies -= 1;
             WaveManager.Instance.AreEnemiesAlive();
-            this.gameObject.SetActive(false); 
+            Destroy(gameObject); 
         }
     }
 
