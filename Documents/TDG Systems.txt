@@ -1,0 +1,37 @@
+TDG Systems:
+
+Enemies
+
+-Spawning
+-Moving
+-Attacking
+-Dying
+-Unique Behaviors
+
+Towers
+
+-Placing
+-Types
+--Attack
+--Defense
+--Resource Gathering
+-Cost
+-Dying
+
+UI
+
+-Resources
+-Tower Menu
+-Level Progress
+-Upgrade Menus
+-Settings Menu
+-Title Screen
+-Win Screen
+-Lose Screen
+
+Levels
+
+-Enemy Pool
+-Manual vs Algorithm Based
+-Map Design
+-

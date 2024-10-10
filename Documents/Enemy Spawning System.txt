@@ -1,0 +1,26 @@
+Enemy Spawning System:
+
+1. Define the types of enemies to spawn on a level
+
+-Currently using a list of Enemy Pool Info for this
+
+-Considerations
+--
+
+2. Define how many/how often each type will spawn
+
+-Possible Methods (currently using Count)
+--Count: Give each enemy type a specific number to spawn
+--Percentage of total: Give a total number of enemies for the level, and give each enemy type a percentage of that total
+--Spawn Rate: Give each enemy type a spawn rate/timer and stop spawning once a given enemy total or duration is reached
+--Percentage chance: Have a universal spawn rate/timer and randomly choose the next enemy based off of spawn weights until a given enemy total/duration is reached
+--Combination: Do some combination of above methods
+
+-Considerations
+--
+
+3. Spawn the enemies into lanes
+
+-Considerations
+--Do all enemy types spawn in all lanes?
+--Will lanes always have an equal weight for spawn chance?
