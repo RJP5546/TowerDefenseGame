@@ -43,7 +43,7 @@ public class WaveManager : Singleton<WaveManager>
             else { return; }
         }
 
-        if (waveCountdown <= 0 && spawnerState != SpawnState.SPAWNING) 
+        if (waveCountdown <= 0 && spawnerState == SpawnState.COUNTING) 
         {
             StartCoroutine(SpawnWave(waves[nextWave]));
         }
@@ -63,9 +63,12 @@ public class WaveManager : Singleton<WaveManager>
     {
         foreach (EnemyPoolInfo enemyType in wave.PoolInfo) { wave.NumberOfEnemies += enemyType.AmountToPool; }
 
+        spawnerState = SpawnState.SPAWNING;
+
         EnemySpawningPool.Instance.InitializeEnemyQueue(wave.PoolInfo);
 
-        spawnerState = SpawnState.SPAWNING;
+        
+        areEnemiesAlive = true;
 
         for (int i = 0; i <= wave.NumberOfEnemies; i++)
         {
