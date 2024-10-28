@@ -57,6 +57,7 @@ public class WaveManager : Singleton<WaveManager>
     {
         if (EnemySpawningPool.Instance.ActiveEnemies <= 0) { areEnemiesAlive = false; }
         else { areEnemiesAlive = true; }
+        
     }
 
     IEnumerator SpawnWave(Wave wave)
@@ -66,8 +67,8 @@ public class WaveManager : Singleton<WaveManager>
         spawnerState = SpawnState.SPAWNING;
 
         EnemySpawningPool.Instance.InitializeEnemyQueue(wave.PoolInfo);
+        WaveProgressTracker.Instance.EnemiesInWave = wave.NumberOfEnemies;
 
-        
         areEnemiesAlive = true;
 
         for (int i = 0; i <= wave.NumberOfEnemies; i++)

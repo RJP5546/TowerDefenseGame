@@ -65,6 +65,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -166,6 +169,7 @@ MonoBehaviour:
   attackRate: 0.5
   attackCooldown: 0
   projectile: {fileID: 4453653196166042349, guid: f4fa641151f838d41b79aa5018953b49, type: 3}
+  melee: {fileID: 0}
   barrelPos: {fileID: 2529332712321812911}
 --- !u!114 &-7665799777794508728
 MonoBehaviour:
@@ -193,7 +197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15e72c28ffc92014baf830711e5a0dd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 100
   currentHealth: 0
   onDie:
     m_PersistentCalls:

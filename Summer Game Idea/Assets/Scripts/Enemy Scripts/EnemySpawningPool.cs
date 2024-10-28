@@ -93,7 +93,6 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
 
         GameObject result = EnemyQueue.Dequeue();
 
-        //for debugging
         ActiveEnemies += 1;
 
         result.SetActive(true);
