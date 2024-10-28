@@ -10,6 +10,7 @@ public class AttackManager : MonoBehaviour
     [SerializeField] private float attackCooldown = 0;
 
     [SerializeField] private GameObject projectile;
+    [SerializeField] private Melee melee;
     [SerializeField] private Transform barrelPos;
 
     private void Awake()
@@ -37,6 +38,12 @@ public class AttackManager : MonoBehaviour
         if (projectile != null)
         {
             Instantiate(projectile, barrelPos.position, barrelPos.rotation);
+            return;
+        }
+        else if (melee != null)
+        {
+            melee.MeleeAttack() ;
+            return;
         }
         else { }
     }
