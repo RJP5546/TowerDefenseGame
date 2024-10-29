@@ -29,7 +29,7 @@ public class AttackRange : MonoBehaviour
     public void EnemyInRange()
     {
         RaycastHit hit;
-        Debug.Log("RaycastCheck");
+
         //layer 9 is the projectile layer
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, range, 9))
         {

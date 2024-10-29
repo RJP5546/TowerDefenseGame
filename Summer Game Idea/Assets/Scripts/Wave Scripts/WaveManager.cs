@@ -23,6 +23,10 @@ public class WaveManager : Singleton<WaveManager>
 
     [SerializeField] private SpawnState spawnerState = SpawnState.COUNTING;
 
+    [SerializeField] private float totalEnemiesInWave;
+    public float SpawnedEnemies = 0;
+    public float WavePercentRemaining;
+
     public bool spawnNextWave;
 
     private bool areEnemiesAlive = true;
@@ -34,10 +38,13 @@ public class WaveManager : Singleton<WaveManager>
 
     private void Update()
     {
+        
+
         if (spawnerState == SpawnState.WAITING)
         {
             if (!areEnemiesAlive)
             {
+                WaveProgressTracker.Instance.EndtOfWave();
                 WaveCompleted();
             }
             else { return; }
@@ -46,6 +53,7 @@ public class WaveManager : Singleton<WaveManager>
         if (waveCountdown <= 0 && spawnerState == SpawnState.COUNTING) 
         {
             StartCoroutine(SpawnWave(waves[nextWave]));
+            WaveProgressTracker.Instance.StartOfWave();
         }
         else
         {
@@ -55,7 +63,8 @@ public class WaveManager : Singleton<WaveManager>
 
     public void AreEnemiesAlive()
     {
-        if (EnemySpawningPool.Instance.ActiveEnemies <= 0) { areEnemiesAlive = false; }
+        WavePercentRemaining = (SpawnedEnemies / totalEnemiesInWave) * 100;
+        if (SpawnedEnemies <= 0) { areEnemiesAlive = false; }
         else { areEnemiesAlive = true; }
         
     }
@@ -67,9 +76,10 @@ public class WaveManager : Singleton<WaveManager>
         spawnerState = SpawnState.SPAWNING;
 
         EnemySpawningPool.Instance.InitializeEnemyQueue(wave.PoolInfo);
-        WaveProgressTracker.Instance.EnemiesInWave = wave.NumberOfEnemies;
+        totalEnemiesInWave = wave.NumberOfEnemies;
 
         areEnemiesAlive = true;
+        WavePercentRemaining = (SpawnedEnemies / totalEnemiesInWave) * 100;
 
         for (int i = 0; i <= wave.NumberOfEnemies; i++)
         {
@@ -80,6 +90,7 @@ public class WaveManager : Singleton<WaveManager>
         }
 
         spawnerState = SpawnState.WAITING;
+        
 
         yield break;
     }

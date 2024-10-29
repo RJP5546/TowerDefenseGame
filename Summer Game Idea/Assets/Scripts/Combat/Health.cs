@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
         onDie.Invoke();
         if (this.gameObject.CompareTag("Enemy"))
         {
-            EnemySpawningPool.Instance.ActiveEnemies -= 1;
+            WaveManager.Instance.SpawnedEnemies -= 1;
             WaveManager.Instance.AreEnemiesAlive();
         }
         Destroy(gameObject);

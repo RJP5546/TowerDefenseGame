@@ -32,7 +32,6 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
     //public List<EnemyPoolInfo> tempEnemies;
 
     public Queue<GameObject> EnemyQueue = new Queue<GameObject>();
-    public int ActiveEnemies = 0;
 
 
     /// <summary>
@@ -72,8 +71,10 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
             GameObject enemyInstance = Instantiate(nextEnemy.Enemy);
             enemyInstance.SetActive(false);
             EnemyQueue.Enqueue(enemyInstance);
-            
-            if(nextEnemy.IsFinishedPooling())
+
+            WaveManager.Instance.SpawnedEnemies += 1;
+
+            if (nextEnemy.IsFinishedPooling())
             {
                 tempEnemies.RemoveAt(tempEnemyIndex);
             }
@@ -92,8 +93,6 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
         }
 
         GameObject result = EnemyQueue.Dequeue();
-
-        ActiveEnemies += 1;
 
         result.SetActive(true);
         result.transform.position = Waypoints.Lanes[UnityEngine.Random.Range(0, Waypoints.Lanes.Length)].position;

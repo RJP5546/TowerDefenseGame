@@ -26,7 +26,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (other.gameObject.tag == "End") 
         {
-            EnemySpawningPool.Instance.ActiveEnemies -= 1;
+            WaveManager.Instance.SpawnedEnemies -= 1;
             WaveManager.Instance.AreEnemiesAlive();
             Destroy(gameObject); 
         }
