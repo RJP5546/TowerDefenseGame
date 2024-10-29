@@ -32,7 +32,7 @@ public class WaveProgressTracker : Singleton<WaveProgressTracker>
     /// <summary>
     /// Called before start(). used to initialize variables and clamp inputs
     /// </summary>
-    private void Awake()
+    protected override void AwakeOverride()
     {
         //Get the progress bar reference
         if (progressSlider == null) { progressSlider = GetComponent<Slider>(); }

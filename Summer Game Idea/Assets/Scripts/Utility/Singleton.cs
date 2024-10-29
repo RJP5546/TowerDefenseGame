@@ -11,6 +11,8 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     private void Awake()
     {
         CheckForSingleton();
+
+        AwakeOverride();
     }
 
     void CheckForSingleton()
@@ -26,4 +28,6 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
 
     }
+
+    protected void AwakeOverride(){}
 }
