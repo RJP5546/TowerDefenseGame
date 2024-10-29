@@ -72,8 +72,6 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
             enemyInstance.SetActive(false);
             EnemyQueue.Enqueue(enemyInstance);
 
-            WaveManager.Instance.SpawnedEnemies += 1;
-
             if (nextEnemy.IsFinishedPooling())
             {
                 tempEnemies.RemoveAt(tempEnemyIndex);

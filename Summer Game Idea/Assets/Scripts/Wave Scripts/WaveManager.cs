@@ -24,12 +24,27 @@ public class WaveManager : Singleton<WaveManager>
     [SerializeField] private SpawnState spawnerState = SpawnState.COUNTING;
 
     [SerializeField] private float totalEnemiesInWave;
-    public float SpawnedEnemies = 0;
-    public float WavePercentRemaining;
+
+    public float WaveProgressPercent
+    {
+        get
+        {
+            return totalSpawnedEnemies / totalEnemiesInWave;
+        }
+    }
 
     public bool spawnNextWave;
 
-    private bool areEnemiesAlive = true;
+    private bool AreEnemiesAlive
+    {
+        get
+        {
+            return currentSpawnedEnemies > 0;
+        }
+    }
+
+    private float currentSpawnedEnemies = 0;
+    private float totalSpawnedEnemies = 0;
 
     private void Start()
     {
@@ -38,11 +53,9 @@ public class WaveManager : Singleton<WaveManager>
 
     private void Update()
     {
-        
-
         if (spawnerState == SpawnState.WAITING)
         {
-            if (!areEnemiesAlive)
+            if (!AreEnemiesAlive)
             {
                 WaveProgressTracker.Instance.EndtOfWave();
                 WaveCompleted();
@@ -61,14 +74,6 @@ public class WaveManager : Singleton<WaveManager>
         }
     }
 
-    public void AreEnemiesAlive()
-    {
-        WavePercentRemaining = (SpawnedEnemies / totalEnemiesInWave) * 100;
-        if (SpawnedEnemies <= 0) { areEnemiesAlive = false; }
-        else { areEnemiesAlive = true; }
-        
-    }
-
     IEnumerator SpawnWave(Wave wave)
     {
         foreach (EnemyPoolInfo enemyType in wave.PoolInfo) { wave.NumberOfEnemies += enemyType.AmountToPool; }
@@ -78,19 +83,15 @@ public class WaveManager : Singleton<WaveManager>
         EnemySpawningPool.Instance.InitializeEnemyQueue(wave.PoolInfo);
         totalEnemiesInWave = wave.NumberOfEnemies;
 
-        areEnemiesAlive = true;
-        WavePercentRemaining = (SpawnedEnemies / totalEnemiesInWave) * 100;
-
         for (int i = 0; i <= wave.NumberOfEnemies; i++)
         {
-            
             EnemySpawningPool.Instance.SpawnNextEnemy();
+            EnemySpawned();
 
             yield return new WaitForSeconds(1 / wave.SpawnRate);
         }
 
         spawnerState = SpawnState.WAITING;
-        
 
         yield break;
     }
@@ -105,6 +106,16 @@ public class WaveManager : Singleton<WaveManager>
         waveCountdown = timeBetweenWaves;
 
         nextWave = (nextWave + 1) % waves.Length;
-        
+    }
+
+    public void EnemySpawned()
+    {
+        totalSpawnedEnemies++;
+        currentSpawnedEnemies++;
+    }
+
+    public void EnemyRemoved()
+    {
+        currentSpawnedEnemies--;
     }
 }
