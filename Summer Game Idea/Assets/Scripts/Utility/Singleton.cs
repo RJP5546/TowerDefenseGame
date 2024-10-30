@@ -29,5 +29,5 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 
     }
 
-    protected void AwakeOverride(){}
+    protected virtual void AwakeOverride(){}
 }

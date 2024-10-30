@@ -29,7 +29,7 @@ public class WaveManager : Singleton<WaveManager>
     {
         get
         {
-            return totalSpawnedEnemies / totalEnemiesInWave;
+            return currentSpawnedEnemies / totalEnemiesInWave;
         }
     }
 
@@ -43,7 +43,7 @@ public class WaveManager : Singleton<WaveManager>
         }
     }
 
-    private float currentSpawnedEnemies = 0;
+    [SerializeField]private float currentSpawnedEnemies = 0;
     private float totalSpawnedEnemies = 0;
 
     private void Start()
@@ -83,7 +83,7 @@ public class WaveManager : Singleton<WaveManager>
         EnemySpawningPool.Instance.InitializeEnemyQueue(wave.PoolInfo);
         totalEnemiesInWave = wave.NumberOfEnemies;
 
-        for (int i = 0; i <= wave.NumberOfEnemies; i++)
+        for (int i = 0; i < wave.NumberOfEnemies; i++)
         {
             EnemySpawningPool.Instance.SpawnNextEnemy();
             EnemySpawned();

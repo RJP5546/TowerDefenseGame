@@ -145,7 +145,7 @@ RectTransform:
   m_GameObject: {fileID: 41514662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 850390424}
@@ -155,7 +155,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -588, y: -365.83334}
+  m_AnchoredPosition: {x: -750, y: -500}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &41514664
@@ -203,7 +203,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 550799725}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 100
+  m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
@@ -599,9 +599,8 @@ MonoBehaviour:
   waveCountdown: 0
   spawnerState: 2
   totalEnemiesInWave: 0
-  SpawnedEnemies: 0
-  WavePercentRemaining: 0
   spawnNextWave: 1
+  currentSpawnedEnemies: 0
 --- !u!114 &389272038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,8 +627,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressSlider: {fileID: 41514664}
   Sun: {fileID: 705507993}
-  barLerpRate: 50
-  sunLerpRate: 50
+  sunriseStartRotation: {x: -60, y: -90, z: 180}
+  sunriseEndRotation: {x: 0, y: -150, z: 270}
+  sunriseBarLerpRate: 0.5
+  sunriseSunLerpRate: 0.5
+  daytimeStartRotation: {x: 0, y: -150, z: 270}
+  daytimeEndRotation: {x: 0, y: -30, z: 89}
+  daytimeBarLerpRate: 0.5
+  daytimeSunLerpRate: 0.5
+  sunsetStartRotation: {x: 0, y: -30, z: 90}
+  sunsetEndRotation: {x: -60, y: -90, z: 180}
+  sunsetBarLerpRate: 0.5
+  sunsetSunLerpRate: 0.5
 --- !u!1001 &501659019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1079,13 +1088,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.96587306, y: -0.0060067186, z: 0.25877497, w: 0.009417861}
+  m_LocalRotation: {x: 0.18300967, y: 0.1830157, z: -0.68301165, w: -0.6830138}
   m_LocalPosition: {x: 18.89, y: 30.04, z: 13.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -0.864, y: -149.996, z: 179.056}
+  m_LocalEulerAnglesHint: {x: 0, y: -30, z: 450}
 --- !u!1001 &789992542
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2662,10 +2671,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
