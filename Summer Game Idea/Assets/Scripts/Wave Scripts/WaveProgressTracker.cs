@@ -121,11 +121,11 @@ public class WaveProgressTracker : Singleton<WaveProgressTracker>
         Debug.Log("Daytime Start");
 
         //Exact percentage the wave is complete
-        float _waveProgress = 1;
+        float _waveProgress = 0;
         //percentage the sun has moved, smoothed by lerping value
-        float _sunProgress = 1;
+        float _sunProgress = 0;
         //percentage the bar has moved, smoothed by lerping value
-        float _barProgress = 1;
+        float _barProgress = 0;
 
         //while the wave is running
         while (true)
@@ -134,11 +134,11 @@ public class WaveProgressTracker : Singleton<WaveProgressTracker>
             _waveProgress = WaveManager.Instance.WaveProgressPercent;
 
             //move the bar towards the wave progress at the lerping rate
-            _barProgress = Mathf.Max(_waveProgress, _barProgress - (daytimeBarLerpRate * Time.deltaTime));
-            progressSlider.value = _barProgress;
+            _barProgress = Mathf.Min(_waveProgress, _barProgress + (daytimeBarLerpRate * Time.deltaTime));
+            progressSlider.value = 1 - _barProgress;
 
             //move the sun towards the wave progress at the lerping rate
-            _sunProgress = Mathf.Min(1 - _waveProgress, _sunProgress + (daytimeSunLerpRate * Time.deltaTime));
+            _sunProgress = Mathf.Min(_waveProgress, _sunProgress + (daytimeSunLerpRate * Time.deltaTime));
             Sun.transform.localRotation = Quaternion.Lerp(Quaternion.Euler(daytimeStartRotation), Quaternion.Euler(daytimeEndRotation), _sunProgress);
 
             yield return null;

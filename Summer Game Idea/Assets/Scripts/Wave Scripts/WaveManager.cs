@@ -29,7 +29,7 @@ public class WaveManager : Singleton<WaveManager>
     {
         get
         {
-            return currentSpawnedEnemies / totalEnemiesInWave;
+            return totalKilledEnemies / totalEnemiesInWave;
         }
     }
 
@@ -45,6 +45,7 @@ public class WaveManager : Singleton<WaveManager>
 
     [SerializeField]private float currentSpawnedEnemies = 0;
     private float totalSpawnedEnemies = 0;
+    private float totalKilledEnemies = 0;
 
     private void Start()
     {
@@ -106,6 +107,10 @@ public class WaveManager : Singleton<WaveManager>
         waveCountdown = timeBetweenWaves;
 
         nextWave = (nextWave + 1) % waves.Length;
+
+        totalKilledEnemies = 0;
+        totalSpawnedEnemies = 0;
+        currentSpawnedEnemies = 0;
     }
 
     public void EnemySpawned()
@@ -117,5 +122,6 @@ public class WaveManager : Singleton<WaveManager>
     public void EnemyRemoved()
     {
         currentSpawnedEnemies--;
+        totalKilledEnemies++;
     }
 }
