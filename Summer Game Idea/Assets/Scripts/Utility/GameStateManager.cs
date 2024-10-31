@@ -9,7 +9,6 @@ public class GameStateManager : Singleton<GameStateManager>
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(isBusy);
         if (!isBusy)
         {
             
