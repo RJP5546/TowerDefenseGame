@@ -2,6 +2,7 @@ public enum SpawnState
 {
     SPAWNING,
     WAITING,
-    COUNTING
+    COUNTING,
+    STANDBY
 }
 

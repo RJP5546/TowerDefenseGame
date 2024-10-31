@@ -44,41 +44,10 @@ public class WaveProgressTracker : Singleton<WaveProgressTracker>
     }
 
     /// <summary>
-    /// Called at beginning of a new wave. Ends any current sun coroutine and starts the sunrise
-    /// </summary>
-    public void StartOfWave()
-    {
-        if(lastRunCoroutine == null) { lastRunCoroutine = StartCoroutine(SunRise()); }
-        else
-        {
-            StopCoroutine(lastRunCoroutine);
-            lastRunCoroutine = StartCoroutine(SunRise());
-        }
-    }
-
-    /// <summary>
-    /// Called after sunrise finishes. Starts coroutine to move sun across the screen
-    /// </summary>
-    public void Wave()
-    {
-        StopCoroutine(lastRunCoroutine);
-        lastRunCoroutine = StartCoroutine(Daytime());
-    }
-
-    /// <summary>
-    /// Called when wave finishes. Starts coroutine for the sunset
-    /// </summary>
-    public void EndtOfWave()
-    {
-        StopCoroutine(lastRunCoroutine);
-        lastRunCoroutine = StartCoroutine(SunSet());
-    }
-
-    /// <summary>
     /// Coroutine for making the sun rise from midnight
     /// </summary>
     /// <returns></returns>
-    private IEnumerator SunRise()
+    public IEnumerator SunRise()
     {
         Debug.Log("Sunrise Start");
         //Percent progress of the sunrise
@@ -87,7 +56,7 @@ public class WaveProgressTracker : Singleton<WaveProgressTracker>
         float _progressBarFill = 0;
 
         //while the sunrise isnt finished
-        while (_sunriseProgress < 1)
+        while (_sunriseProgress <= 1)
         {
             //Increase the progress bar's fill by the lerp rate
             _progressBarFill += sunriseBarLerpRate * Time.deltaTime;
@@ -106,9 +75,6 @@ public class WaveProgressTracker : Singleton<WaveProgressTracker>
         progressSlider.value = 1;
         Sun.transform.localRotation = Quaternion.Euler(sunriseEndRotation);
 
-        //start the daytime coroutine
-        Wave();
-
         Debug.Log("Sunrise End");
     }
 
@@ -116,7 +82,7 @@ public class WaveProgressTracker : Singleton<WaveProgressTracker>
     /// Runs every frame while the wave is running. Updates the progress bar and sun position
     /// </summary>
     /// <returns></returns>
-    private IEnumerator Daytime()
+    public IEnumerator Daytime()
     {
         Debug.Log("Daytime Start");
 
@@ -128,7 +94,7 @@ public class WaveProgressTracker : Singleton<WaveProgressTracker>
         float _barProgress = 0;
 
         //while the wave is running
-        while (true)
+        while (WaveManager.Instance.IsWaveRunning)
         {
             //Get the exact wave progress
             _waveProgress = WaveManager.Instance.WaveProgressPercent;
@@ -143,13 +109,14 @@ public class WaveProgressTracker : Singleton<WaveProgressTracker>
 
             yield return null;
         }
+        Debug.Log("Daytime End");
     }
 
     /// <summary>
     /// Moves through the sunset animation
     /// </summary>
     /// <returns></returns>
-    private IEnumerator SunSet()
+    public IEnumerator SunSet()
     {
         Debug.Log("Sunset start");
 

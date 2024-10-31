@@ -21,7 +21,7 @@ public class WaveManager : Singleton<WaveManager>
     [SerializeField] private float timeBetweenWaves;
     [SerializeField] private float waveCountdown = 0;
 
-    [SerializeField] private SpawnState spawnerState = SpawnState.COUNTING;
+    [SerializeField] private SpawnState spawnerState = SpawnState.STANDBY;
 
     [SerializeField] private float totalEnemiesInWave;
 
@@ -33,7 +33,9 @@ public class WaveManager : Singleton<WaveManager>
         }
     }
 
-    public bool spawnNextWave;
+    public bool IsWaveRunning;
+
+    //public bool spawnNextWave;
 
     private bool AreEnemiesAlive
     {
@@ -54,25 +56,36 @@ public class WaveManager : Singleton<WaveManager>
 
     private void Update()
     {
+        //if on standby do nothing
+        if (spawnerState == SpawnState.STANDBY) { return; }
+        //if the wave has spawned and are waiting for all enemies to die off
         if (spawnerState == SpawnState.WAITING)
         {
             if (!AreEnemiesAlive)
             {
-                WaveProgressTracker.Instance.EndtOfWave();
+                //all the enemies have been killed
+                IsWaveRunning = false;
                 WaveCompleted();
             }
             else { return; }
         }
-
+        //if we are in counting and the timer is at 0, spawn next wave
         if (waveCountdown <= 0 && spawnerState == SpawnState.COUNTING) 
         {
             StartCoroutine(SpawnWave(waves[nextWave]));
-            WaveProgressTracker.Instance.StartOfWave();
         }
+        //if we are in COUNTING but the timer is not at 0
         else
         {
             waveCountdown -= Time.deltaTime;
         }
+    }
+
+    public void StartCounting()
+    {
+        spawnerState = SpawnState.COUNTING;
+        //setting the spawner state to counting starts the process for the wave
+        IsWaveRunning = true;
     }
 
     IEnumerator SpawnWave(Wave wave)
@@ -81,9 +94,11 @@ public class WaveManager : Singleton<WaveManager>
 
         spawnerState = SpawnState.SPAWNING;
 
+        //initalize the enemies for the wave
         EnemySpawningPool.Instance.InitializeEnemyQueue(wave.PoolInfo);
         totalEnemiesInWave = wave.NumberOfEnemies;
 
+        //set the enemies to active throughout the wave
         for (int i = 0; i < wave.NumberOfEnemies; i++)
         {
             EnemySpawningPool.Instance.SpawnNextEnemy();
@@ -92,6 +107,7 @@ public class WaveManager : Singleton<WaveManager>
             yield return new WaitForSeconds(1 / wave.SpawnRate);
         }
 
+        //all enemies are active
         spawnerState = SpawnState.WAITING;
 
         yield break;
@@ -103,7 +119,7 @@ public class WaveManager : Singleton<WaveManager>
 
         waves[nextWave].NumberOfEnemies = 0;
 
-        spawnerState = SpawnState.COUNTING;
+        spawnerState = SpawnState.STANDBY;
         waveCountdown = timeBetweenWaves;
 
         nextWave = (nextWave + 1) % waves.Length;

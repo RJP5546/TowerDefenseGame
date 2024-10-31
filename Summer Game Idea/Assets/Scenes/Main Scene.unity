@@ -537,6 +537,7 @@ GameObject:
   - component: {fileID: 389272035}
   - component: {fileID: 389272038}
   - component: {fileID: 389272039}
+  - component: {fileID: 389272040}
   m_Layer: 0
   m_Name: GameManagers
   m_TagString: Untagged
@@ -599,7 +600,7 @@ MonoBehaviour:
   waveCountdown: 0
   spawnerState: 2
   totalEnemiesInWave: 0
-  spawnNextWave: 1
+  IsWaveRunning: 0
   currentSpawnedEnemies: 0
 --- !u!114 &389272038
 MonoBehaviour:
@@ -635,10 +636,23 @@ MonoBehaviour:
   daytimeEndRotation: {x: 0, y: -30, z: 89}
   daytimeBarLerpRate: 0.5
   daytimeSunLerpRate: 0.5
-  sunsetStartRotation: {x: 0, y: -30, z: 90}
+  sunsetStartRotation: {x: 0, y: -30, z: 89}
   sunsetEndRotation: {x: -60, y: -90, z: 180}
   sunsetBarLerpRate: 0.5
   sunsetSunLerpRate: 0.5
+--- !u!114 &389272040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389272034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccf5f64dea922b844aba1e1920ffca58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameState: 0
 --- !u!1001 &501659019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1088,13 +1102,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18300967, y: 0.1830157, z: -0.68301165, w: -0.6830138}
+  m_LocalRotation: {x: -0.61237246, y: 0.3535534, z: 0.61237246, w: 0.3535534}
   m_LocalPosition: {x: 18.89, y: 30.04, z: 13.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -30, z: 450}
+  m_LocalEulerAnglesHint: {x: -60, y: -90, z: 180}
 --- !u!1001 &789992542
 PrefabInstance:
   m_ObjectHideFlags: 0
