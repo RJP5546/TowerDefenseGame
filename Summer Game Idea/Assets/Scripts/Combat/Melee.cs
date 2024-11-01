@@ -7,12 +7,17 @@ public class Melee : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private float damage;
 
+    private AttackRange attackRange;
+
+    private void Start()
+    {
+        attackRange = GetComponent<AttackRange>();
+    }
+
     public void MeleeAttack()
     {
         RaycastHit hit;
-        Debug.Log("Melee Attack");
-        //layer 9 is the projectile layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, range, 9))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, range, attackRange.GetTargetingMask()))
         {
             if (hit.transform.gameObject.CompareTag("Tower"))
             {

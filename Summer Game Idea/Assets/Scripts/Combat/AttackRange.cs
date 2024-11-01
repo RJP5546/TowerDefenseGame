@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class AttackRange : MonoBehaviour
 {
@@ -8,11 +9,23 @@ public class AttackRange : MonoBehaviour
 
     [SerializeField] private string targetTag = null;
 
+    private static LayerMask projectileLayer = 9;
+    private static LayerMask towerLayer = 10;
+    public int targetingMask;
+
     public bool IsEnemyInRange { get; private set; }
 
     private void Awake()
     {
         IsEnemyInRange = false;
+        if (this.gameObject.CompareTag("Tower"))
+        {
+             targetingMask = ~(1 << projectileLayer | 1 << towerLayer);
+        }
+        else if (this.gameObject.CompareTag("Enemy"))
+        {
+            targetingMask = ~( 1 << projectileLayer);
+        }
     }
 
     private void Update()
@@ -31,19 +44,25 @@ public class AttackRange : MonoBehaviour
         RaycastHit hit;
 
         //layer 9 is the projectile layer
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, range, 9))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, range, targetingMask))
         {
             if (hit.transform.gameObject.CompareTag(targetTag))
             {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.green);
                 IsEnemyInRange = true;
             }
 
             else
             {
                 IsEnemyInRange = false;
+                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
             }
         }
         else { IsEnemyInRange = false; }
+    }
+
+    public int GetTargetingMask()
+    {
+        return targetingMask;
     }
 }

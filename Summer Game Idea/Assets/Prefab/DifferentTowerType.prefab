@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -7558196186116186226}
   - component: {fileID: -7665799777794508728}
   - component: {fileID: -6154134742528334596}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DifferentTowerType
   m_TagString: Tower
   m_Icon: {fileID: 0}
@@ -166,9 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackRange: {fileID: -7665799777794508728}
-  attackRate: 0.5
+  attackRate: 0.1
   attackCooldown: 0
-  projectile: {fileID: 4453653196166042349, guid: f4fa641151f838d41b79aa5018953b49, type: 3}
+  projectile: {fileID: 4453653196166042349, guid: 2488789a290be0b43bafa1f48b754571, type: 3}
   melee: {fileID: 0}
   barrelPos: {fileID: 2529332712321812911}
 --- !u!114 &-7665799777794508728
@@ -211,7 +211,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2529332712321812911}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
