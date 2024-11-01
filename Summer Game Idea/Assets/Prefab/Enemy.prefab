@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 29706686581552051}
   - component: {fileID: 8294325729759632427}
   - component: {fileID: -6894038468034245549}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -221,6 +221,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 1
   targetTag: Tower
+  targetingMask: 0
 --- !u!114 &-6894038468034245549
 MonoBehaviour:
   m_ObjectHideFlags: 0

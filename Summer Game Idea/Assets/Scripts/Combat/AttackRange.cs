@@ -11,6 +11,7 @@ public class AttackRange : MonoBehaviour
 
     private static LayerMask projectileLayer = 9;
     private static LayerMask towerLayer = 10;
+    private static LayerMask enemyLayer = 11;
     public int targetingMask;
 
     public bool IsEnemyInRange { get; private set; }
@@ -20,11 +21,12 @@ public class AttackRange : MonoBehaviour
         IsEnemyInRange = false;
         if (this.gameObject.CompareTag("Tower"))
         {
+            //sets our targeting ray to hit everything but these two layers
              targetingMask = ~(1 << projectileLayer | 1 << towerLayer);
         }
         else if (this.gameObject.CompareTag("Enemy"))
         {
-            targetingMask = ~( 1 << projectileLayer);
+            targetingMask = ~( 1 << projectileLayer | 1 << enemyLayer);
         }
     }
 
