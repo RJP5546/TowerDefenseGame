@@ -535,7 +535,6 @@ GameObject:
   - component: {fileID: 389272036}
   - component: {fileID: 389272037}
   - component: {fileID: 389272035}
-  - component: {fileID: 389272038}
   - component: {fileID: 389272039}
   - component: {fileID: 389272040}
   - component: {fileID: 389272041}
@@ -603,18 +602,6 @@ MonoBehaviour:
   totalEnemiesInWave: 0
   IsWaveRunning: 0
   currentSpawnedEnemies: 0
---- !u!114 &389272038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 389272034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 668d439f7c010ae4198c1a22c2480421, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &389272039
 MonoBehaviour:
   m_ObjectHideFlags: 0

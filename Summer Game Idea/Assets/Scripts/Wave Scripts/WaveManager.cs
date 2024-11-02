@@ -140,4 +140,9 @@ public class WaveManager : Singleton<WaveManager>
         currentSpawnedEnemies--;
         totalKilledEnemies++;
     }
+
+    public float ReturnTimeBetweenWaves()
+    {
+        return timeBetweenWaves;
+    }
 }

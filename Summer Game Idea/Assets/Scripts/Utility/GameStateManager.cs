@@ -55,6 +55,7 @@ public class GameStateManager : Singleton<GameStateManager>
         if (!WaveManager.Instance.IsWaveRunning)
         {
             WaveManager.Instance.StartCounting();
+            yield return new WaitForSeconds(WaveManager.Instance.ReturnTimeBetweenWaves());
             StartCoroutine(WaveProgressTracker.Instance.Daytime());
         }
         //if the wave is running, do nothing
