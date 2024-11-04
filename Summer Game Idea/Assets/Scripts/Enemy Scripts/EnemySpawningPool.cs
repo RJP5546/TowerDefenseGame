@@ -29,7 +29,7 @@ public class EnemyPoolInfo
 
 public class EnemySpawningPool : Singleton<EnemySpawningPool>
 {
-    //public List<EnemyPoolInfo> tempEnemies;
+    [SerializeField] private Vector3 enemySpawnLocation;
 
     public Queue<GameObject> EnemyQueue = new Queue<GameObject>();
 
@@ -68,7 +68,7 @@ public class EnemySpawningPool : Singleton<EnemySpawningPool>
             nextEnemy.PoolEnemy();
 
             //spawn an enemyInstance of that item and add it to the queue
-            GameObject enemyInstance = Instantiate(nextEnemy.Enemy);
+            GameObject enemyInstance = Instantiate(nextEnemy.Enemy, enemySpawnLocation, transform.rotation);
             enemyInstance.SetActive(false);
             EnemyQueue.Enqueue(enemyInstance);
 

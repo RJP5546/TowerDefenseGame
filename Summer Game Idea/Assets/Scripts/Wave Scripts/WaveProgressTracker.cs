@@ -27,8 +27,6 @@ public class WaveProgressTracker : Singleton<WaveProgressTracker>
     [SerializeField] private float sunsetBarLerpRate;
     [SerializeField] private float sunsetSunLerpRate;
 
-    private Coroutine lastRunCoroutine = null;
-
     /// <summary>
     /// Called before start(). used to initialize variables and clamp inputs
     /// </summary>

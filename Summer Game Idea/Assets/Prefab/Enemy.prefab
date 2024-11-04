@@ -221,7 +221,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 1
   targetTag: Tower
-  targetingMask: 0
+  targetingMask:
+    serializedVersion: 2
+    m_Bits: 151
 --- !u!114 &-6894038468034245549
 MonoBehaviour:
   m_ObjectHideFlags: 0

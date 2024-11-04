@@ -185,6 +185,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 40
   targetTag: Enemy
+  targetingMask:
+    serializedVersion: 2
+    m_Bits: 279
 --- !u!114 &-6154134742528334596
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -22,5 +22,6 @@ public class Projectile : MonoBehaviour
             else { Debug.LogWarning("Target has no health component"); }
             Destroy(gameObject);
         }
+        if (other.gameObject.tag == "StartOfLane") { Destroy(gameObject); }
     }
 }
